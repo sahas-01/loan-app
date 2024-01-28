@@ -1,11 +1,23 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import Signup from './Signup.jsx';
+import Login from './Login.jsx';
+export const App = () => {
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
-  </div>
-);
+  return (
+    <>
+      <BrowserRouter>
+        <div>
+          <Routes>
+            <Route exact path="/signup" element={<Signup />}></Route>
+            <Route exact path="/login" element={<Login />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </>
+  )
+};
