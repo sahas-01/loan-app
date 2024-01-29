@@ -7,7 +7,20 @@ function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(email);
+        Meteor.call("users.login", { email, password }, (error, res) => {
+            if (error) {
+                console.error("Error login user:", error.reason);
+            } else {
+                console.log("User created successfully");
+                localStorage.setItem("role", res.role);
+                localStorage.setItem("email", email)
+                navigate("/");
+            }
+        });
+    };
 
     return (
         <div className="flex h-dvh justify-center items-center">

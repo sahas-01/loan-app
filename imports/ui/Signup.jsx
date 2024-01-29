@@ -8,7 +8,20 @@ function Signup() {
     const [role, setRole] = useState("");
     const navigate = useNavigate();
 
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(email);
+        Meteor.call("users.signup", { email, role, password }, (error) => {
+            if (error) {
+                console.error("Error creating user:", error.reason);
+            } else {
+                console.log("User created successfully");
+                localStorage.setItem("role", role);
+                localStorage.setItem("email", email)
+                navigate("/");
+            }
+        });
+    };
     console.log(role)
     return (
         <div className="flex h-dvh justify-center items-center">
